@@ -22,6 +22,7 @@ import {
   ChevronRightIcon
 } from '@chakra-ui/icons'
 import { FaShoppingCart } from 'react-icons/fa';
+import Logo from '../../assets/images/logo.png'
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure()
@@ -54,7 +55,7 @@ export default function WithSubnavigation() {
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}>
-            Logo
+              <img src={Logo} alt="Logo" style={{ height: '90px' }} />
           </Text>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -84,7 +85,7 @@ const DesktopNav = () => {
   const popoverContentBgColor = useColorModeValue('white', 'gray.800')
 
   return (
-    <Stack direction={'row'} spacing={4}>
+    <Stack direction={'row'} spacing={4} align="center">
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
@@ -228,7 +229,7 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Man',
+    label: 'Men',
     href: '#', 
     children: [
       {
