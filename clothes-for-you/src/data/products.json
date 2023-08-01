@@ -1,0 +1,93 @@
+[
+  {
+    "id": "1",
+    "name": "Men's Casual Shirt",
+    "description": "A comfortable and stylish casual shirt for men.",
+    "price": 39.99,
+    "discountedPrice": null,
+    "imageUrl1": "../../public/images/1.png",
+    "imageUrl2": "../../public/images/2.png",
+    "ratings": 4.5,
+    "category": "Men",
+    "color": "White",
+    "type": "Clothes"
+  },
+  {
+    "id": "2",
+    "name": "Women's Summer Dress",
+    "description": "A beautiful and lightweight summer dress for women.",
+    "price": 49.99,
+    "discountedPrice": 39.99,
+    "imageUrl1": "../../public/images/3.png",
+    "imageUrl2": "../../public/images/4.png",
+    "ratings": 4.8,
+    "category": "Women",
+    "color": "Yellow",
+    "type": "Clothes"
+  },
+  {
+    "id": "3",
+    "name": "Men's Leather Jacket",
+    "description": "A classic leather jacket for men, perfect for all seasons.",
+    "price": 99.99,
+    "discountedPrice": null,
+    "imageUrl1": "../../public/images/5.png",
+    "imageUrl2": "../../public/images/6.png",
+    "ratings": 4.2,
+    "category": "Men",
+    "color": "Black",
+    "type": "Clothes"
+  },
+  {
+    "id": "4",
+    "name": "Women's High Heels",
+    "description": "Elegant high heels shoes for women, suitable for formal occasions.",
+    "price": 59.99,
+    "discountedPrice": 49.99,
+    "imageUrl1": "../../public/images/7.png",
+    "imageUrl2": "../../public/images/8.png",
+    "ratings": 4.6,
+    "category": "Women",
+    "color": "Black",
+    "type": "Shoes"
+  },
+  {
+    "id": "5",
+    "name": "Men's Polo T-shirt",
+    "description": "A comfortable and versatile polo t-shirt for men.",
+    "price": 29.99,
+    "discountedPrice": null,
+    "imageUrl1": "../../public/images/9.png",
+    "imageUrl2": "../../public/images/10.png",
+    "ratings": 4.3,
+    "category": "Men",
+    "color": "Blue",
+    "type": "Clothes"
+  },
+  {
+    "id": "6",
+    "name": "Women's Denim Jeans",
+    "description": "Stylish and trendy denim jeans for women.",
+    "price": 44.99,
+    "discountedPrice": 39.99,
+    "imageUrl1": "../../public/images/11.png",
+    "imageUrl2": "../../public/images/12.png",
+    "ratings": 4.7,
+    "category": "Women",
+    "color": "Light Blue",
+    "type": "Clothes"
+  },
+  {
+    "id": "7",
+    "name": "Men's Trainers",
+    "description": "Low stylish men trainers.",
+    "price": 114.99,
+    "discountedPrice": 99.99,
+    "imageUrl1": "../../public/images/13.png",
+    "imageUrl2": "../../public/images/14.png",
+    "ratings": 4.5,
+    "category": "Men",
+    "color": "Beige",
+    "type": "Shoes"
+  }
+]

@@ -24,7 +24,15 @@ import {
 import { FaShoppingCart } from 'react-icons/fa';
 import Logo from '../../assets/images/logo.png'
 
-export default function WithSubnavigation() {
+
+
+export default function WithSubnavigation({
+  setSelectedCategory,
+  setSelectedSubCategory
+}: {
+  setSelectedCategory: (label: string) => void;
+  setSelectedSubCategory: (subLabel: string) => void;
+}) {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
@@ -55,11 +63,11 @@ export default function WithSubnavigation() {
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}>
-              <img src={Logo} alt="Logo" style={{ height: '90px' }} />
+            <img src={Logo} alt="Logo" style={{ height: '90px' }} />
           </Text>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
-            <DesktopNav />
+            <DesktopNav setSelectedCategory={setSelectedCategory} setSelectedSubCategory={setSelectedSubCategory}/>
           </Flex>
         </Flex>
 
@@ -68,27 +76,27 @@ export default function WithSubnavigation() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
-           <FaShoppingCart size={28} />
+          <FaShoppingCart size={28} />
         </Stack>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
+        <MobileNav setSelectedSubCategory={setSelectedSubCategory} setSelectedCategory={setSelectedCategory} />
       </Collapse>
     </Box>
   )
 }
 
-const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200')
-  const linkHoverColor = useColorModeValue('gray.800', 'white')
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800')
+const DesktopNav = ({ setSelectedCategory, setSelectedSubCategory }: { setSelectedCategory: (label: string) => void; setSelectedSubCategory: (subLabel: string) => void }) => {
+  const linkColor = useColorModeValue('gray.600', 'gray.200');
+  const linkHoverColor = useColorModeValue('gray.800', 'white');
+  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
   return (
     <Stack direction={'row'} spacing={4} align="center">
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
+          <Popover trigger={'click'} placement={'bottom-start'}>
             <PopoverTrigger>
               <Box
                 as="a"
@@ -100,7 +108,12 @@ const DesktopNav = () => {
                 _hover={{
                   textDecoration: 'none',
                   color: linkHoverColor,
-                }}>
+                }}
+                onClick={() => {
+                  setSelectedCategory(navItem.label);
+                  setSelectedSubCategory(''); 
+                }}
+              >
                 {navItem.label}
               </Box>
             </PopoverTrigger>
@@ -112,10 +125,16 @@ const DesktopNav = () => {
                 bg={popoverContentBgColor}
                 p={4}
                 rounded={'xl'}
-                minW={'sm'}>
+                minW={'sm'}
+              >
                 <Stack>
                   {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
+                    <DesktopSubNav
+                      label={''}
+                      key={child.subLabel}
+                      {...child}
+                      setSelectedSubCategory={setSelectedSubCategory} 
+                    />
                   ))}
                 </Stack>
               </PopoverContent>
@@ -124,10 +143,10 @@ const DesktopNav = () => {
         </Box>
       ))}
     </Stack>
-  )
-}
+  );
+};
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+const DesktopSubNav = ({ description, href, subLabel, setSelectedSubCategory }: SubNavItem & { setSelectedSubCategory: (subLabel: string) => void }) => {
   return (
     <Box
       as="a"
@@ -136,16 +155,19 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}
+      onClick={() => setSelectedSubCategory(subLabel ?? '')}
+    >
       <Stack direction={'row'} align={'center'}>
         <Box>
           <Text
             transition={'all .3s ease'}
             _groupHover={{ color: 'pink.400' }}
-            fontWeight={500}>
-            {label}
+            fontWeight={500}
+          >
+            {subLabel}
           </Text>
-          <Text fontSize={'sm'}>{subLabel}</Text>
+          <Text fontSize={'sm'}>{description}</Text>
         </Box>
         <Flex
           transition={'all .3s ease'}
@@ -154,26 +176,34 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
           justify={'flex-end'}
           align={'center'}
-          flex={1}>
+          flex={1}
+        >
           <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Box>
-  )
-}
+  );
+};
 
-const MobileNav = () => {
+const MobileNav = ({ setSelectedSubCategory, setSelectedCategory }: { setSelectedSubCategory: (label: string) => void; setSelectedCategory: (label: string) => void }) => {
   return (
     <Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{ md: 'none' }}>
       {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
+        <MobileNavItem
+          key={navItem.label}
+          label={navItem.label}
+          href={navItem.href}
+          children={navItem.children}
+          setSelectedSubCategory={setSelectedSubCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
       ))}
     </Stack>
-  )
-}
+  );
+};
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
-  const { isOpen, onToggle } = useDisclosure()
+const MobileNavItem = ({ label, children, href, setSelectedCategory, setSelectedSubCategory }: NavItem & { setSelectedCategory: (label: string) => void; setSelectedSubCategory: (label: string) => void }) => {
+  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
@@ -185,7 +215,9 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         alignItems="center"
         _hover={{
           textDecoration: 'none',
-        }}>
+        }}
+        onClick={() => setSelectedCategory(label)}
+      >
         <Text fontWeight={600} color={useColorModeValue('gray.600', 'gray.200')}>
           {label}
         </Text>
@@ -210,8 +242,8 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           align={'start'}>
           {children &&
             children.map((child) => (
-              <Box as="a" key={child.label} py={2} href={child.href}>
-                {child.label}
+              <Box as="a" key={child.subLabel} py={2} href={child.href} onClick={() => setSelectedSubCategory(child.subLabel)}>
+                {child.subLabel}
               </Box>
             ))}
         </Stack>
@@ -220,43 +252,60 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
   )
 }
 
+
 interface NavItem {
-  label: string
-  subLabel?: string
-  children?: Array<NavItem>
-  href?: string
+  label: string;
+  description?: string;
+  href?: string;
+  children?: Array<SubNavItem>;
+}
+
+interface SubNavItem {
+  subLabel: string;
+  description?: string;
+  href?: string;
 }
 
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'Men',
-    href: '#', 
+    href: '#',
     children: [
       {
-        label: 'Shoes',
-        subLabel: 'Explore stylish shoes for men',
-        href: '#', 
+        subLabel: 'Shoes',
+        description: 'Explore stylish shoes for men',
+        href: '#',
       },
       {
-        label: 'Clothes',
-        subLabel: 'Discover trendy clothes for men',
-        href: '#', 
+        subLabel: 'Clothes',
+        description: 'Discover trendy clothes for men',
+        href: '#',
+      },
+      {
+        subLabel: 'Show All', 
+        description: 'Show all men fashion',
+        href: '#',
       },
     ],
   },
   {
     label: 'Women',
-    href: '#', 
+    href: '#',
     children: [
       {
-        label: 'Shoes',
-        subLabel: 'Find fashionable shoes for women',
-        href: '#', 
+        subLabel: 'Shoes',
+        description: 'Find fashionable shoes for women',
+        href: '#',
       },
       {
-        label: 'Clothes',
-        subLabel: 'Browse stylish clothes for women',
-        href: '#', 
+        subLabel: 'Clothes',
+        description: 'Browse stylish clothes for women',
+        href: '#',
+      },
+      {
+        subLabel: 'Show All', 
+        description: 'Show all women fashion',
+        href: '#',
       },
     ],
   },
