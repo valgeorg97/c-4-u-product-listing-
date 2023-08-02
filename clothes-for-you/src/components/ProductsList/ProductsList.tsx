@@ -1,8 +1,9 @@
 import React from 'react';
 import { getProducts } from '../../services/productsService';
 import { Product } from '../../types/types';
-import { Grid, Box, Image, Heading, Text, VStack } from '@chakra-ui/react';
+import { Grid, Box, Text} from '@chakra-ui/react';
 import { ProductListProps } from '../../types/types';
+import ProductCard from '../ProductCard/ProductCard';
 
 
 const ProductList: React.FC<ProductListProps> = ({ selectedCategory, selectedSubCategory }) => {
@@ -32,27 +33,21 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategory, selectedSub
   });
 
   return (
-    <Grid templateColumns="repeat(3, 1fr)" gap={6} mt={4}>
-      {filteredProducts.map((product) => (
-        <Box key={product.id}>
-          <Image
-            src={product.imageUrl1}
-            alt={product.name}
-            boxSize="300px" 
-            maxW="100%"    
-            maxH="300px"    
-          />
-          <VStack align="start" spacing={2}>
-            <Heading as="h3" size="md">
-              {product.name}
-            </Heading>
-            <Text>{product.description}</Text>
-            <Text>Price: ${product.price}</Text>
-         
-          </VStack>
-        </Box>
-      ))}
-    </Grid>
+    <Box>
+      <Box mb={4}>
+      <Text fontWeight="bold">
+        {selectedCategory} {selectedSubCategory}
+      </Text>
+    </Box>
+      <Text mb={2} fontWeight="bold">
+        Showing {filteredProducts.length} out of {products.length} items
+      </Text>
+      <Grid templateColumns="repeat(3, 1fr)" gap={6} mt={4}>
+        {filteredProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </Grid>
+    </Box>
   );
 };
 

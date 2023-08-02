@@ -1,0 +1,89 @@
+import { useState, useRef } from 'react';
+import { Box, Image, Heading, Text, VStack, Flex, IconButton } from '@chakra-ui/react';
+import { FaShoppingCart } from 'react-icons/fa';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+
+const ProductCard = ({ product }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isHeartFilled, setIsHeartFilled] = useState(false);
+  const [currentImage, setCurrentImage] = useState('imageUrl1');
+  const imageRef = useRef(null);
+
+  const toggleHeart = () => {
+    setIsHeartFilled(!isHeartFilled);
+  };
+
+
+
+  const toggleImage = () => {
+    setCurrentImage(currentImage === 'imageUrl1' ? 'imageUrl2' : 'imageUrl1');
+  };
+
+  return (
+    <Box position="relative" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      <Image
+        src={product[currentImage]} 
+        alt={product.name}
+        boxSize="300px"
+        maxW="150%"
+        maxH="350px"
+        borderRadius={'md'}
+        boxShadow={'md'}
+        _hover={{
+          cursor: 'pointer',
+        }}
+        onClick={toggleImage}
+        ref={imageRef}
+      />
+      <Box
+        position="absolute"
+        top={0}
+        right={24}
+        zIndex={1}
+        transition="visibility 0s, opacity 0.2s linear"
+      >
+        <IconButton
+          aria-label="Add to favorites"
+          icon={isHeartFilled ? <AiFillHeart /> : <AiOutlineHeart />}
+          variant="ghost"
+          color="red.500"
+          _hover={{
+            color: 'red.600',
+          }}
+          onClick={toggleHeart}
+        />
+      </Box>
+      {isHovered && (
+        <Box
+          position="absolute"
+          bottom={8}
+          left={0}
+          right={0}
+          p={2}
+          bg="black"
+          color="white"
+          textAlign="center"
+          width="300px"
+          borderRadius={'md'}
+          _hover={{cursor: 'pointer'}}
+        >
+          <Flex justify="center" align="center" >
+            <FaShoppingCart style={{ marginRight: '8px' }} />
+            Add to cart
+          </Flex>
+        </Box>
+      )}
+      <Box textAlign={"center"} w='300px'>
+        <Heading as="h3" size="md" textAlign="center" mt={2}>
+          {product.name}
+        </Heading>
+        <VStack align="start" spacing={2} visibility={isHovered ? 'hidden' : 'visible'}>
+          <Text>{product.description}</Text>
+          <Text>Price: ${product.price}</Text>
+        </VStack>
+      </Box>
+    </Box>
+  );
+};
+
+export default ProductCard;
