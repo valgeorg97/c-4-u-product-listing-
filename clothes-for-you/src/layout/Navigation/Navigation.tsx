@@ -22,6 +22,7 @@ import {
   ChevronRightIcon
 } from '@chakra-ui/icons'
 import { FaShoppingCart } from 'react-icons/fa';
+import {AiOutlineHeart} from 'react-icons/ai'
 import Logo from '../../assets/images/logo.png'
 
 
@@ -76,6 +77,7 @@ export default function WithSubnavigation({
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
+          <AiOutlineHeart size={28} />
           <FaShoppingCart size={28} />
         </Stack>
       </Flex>

@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Box, Image, Heading, Text, VStack, Flex, IconButton } from '@chakra-ui/react';
+import { Box, Image, Heading, Text, VStack, Flex, IconButton, useToast } from '@chakra-ui/react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
@@ -9,8 +9,28 @@ const ProductCard = ({ product }) => {
   const [currentImage, setCurrentImage] = useState('imageUrl1');
   const imageRef = useRef(null);
 
+  const toast = useToast(); 
+
   const toggleHeart = () => {
     setIsHeartFilled(!isHeartFilled);
+    
+    if (!isHeartFilled) {
+      showToast('Product added to favorites!', 'success');
+    } else {
+      showToast('Product removed from favorites!', 'warning');
+    }
+  };
+  const handleAddToCart = () => {
+    showToast('Product successfully added to cart!', 'success'); 
+  };
+
+  const showToast = (message: string, status: string) => {
+    toast({
+      title: message,
+      status: status,
+      duration: 2000, 
+      isClosable: true,
+    });
   };
 
 
@@ -66,6 +86,7 @@ const ProductCard = ({ product }) => {
           width="300px"
           borderRadius={'md'}
           _hover={{cursor: 'pointer'}}
+          onClick={handleAddToCart}
         >
           <Flex justify="center" align="center" >
             <FaShoppingCart style={{ marginRight: '8px' }} />
