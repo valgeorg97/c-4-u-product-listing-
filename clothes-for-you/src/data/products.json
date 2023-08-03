@@ -74,7 +74,7 @@
     "imageUrl2": "../../public/images/12.png",
     "ratings": 4.7,
     "category": "Women",
-    "color": "Light Blue",
+    "color": "Blue",
     "type": "Clothes"
   },
   {
@@ -152,7 +152,7 @@
     "imageUrl2": "../../public/images/24.png",
     "ratings": 4.8,
     "category": "Men",
-    "color": "Navy Blue",
+    "color": "Blue",
     "type": "Clothes"
   },
   {

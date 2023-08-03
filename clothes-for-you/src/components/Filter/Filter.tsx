@@ -26,7 +26,7 @@ const Filter: React.FC<FilterProps> = ({
     { value: 200, label: 'Above 200$' },
   ];
 
-  const availableColors = ['Blue', 'Red', 'Green', 'Black', 'White', 'Beige', 'Yellow'];
+  const availableColors = ['Blue', 'Red', 'Green', 'Black', 'White', 'Beige', 'Yellow', 'Pink', 'Gray'];
 
   const handleColorFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
@@ -86,7 +86,7 @@ const Filter: React.FC<FilterProps> = ({
               </option>
               <option value="None">None</option>
               {priceTicks.map((tick) => (
-                <option key={tick.value} value={tick.label} disabled={tick.value === 0}>
+                <option key={tick.value} value={tick.label} >
                   {tick.label}
                 </option>
               ))}

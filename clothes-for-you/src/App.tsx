@@ -3,6 +3,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import Navigation from '../src/layout/Navigation/Navigation';
 import ProductList from './components/ProductsList/ProductsList';
 import  { useState } from 'react';
+import Footer from './components/Footer/Footer';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       selectedCategory={selectedCategory}
       selectedSubCategory={selectedSubCategory}
       />
+      <Footer />
     </ChakraProvider>
   );
 }
