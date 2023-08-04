@@ -72,7 +72,7 @@
     "discountedPrice": 39.99,
     "imageUrl1": "../../public/images/11.png",
     "imageUrl2": "../../public/images/12.png",
-    "ratings": 4.7,
+    "ratings": 5,
     "category": "Women",
     "color": "Blue",
     "type": "Clothes"
@@ -124,7 +124,7 @@
     "discountedPrice": 39.99,
     "imageUrl1": "../../public/images/19.png",
     "imageUrl2": "../../public/images/20.png",
-    "ratings": 4.6,
+    "ratings": 3.5,
     "category": "Men",
     "color": "Pink",
     "type": "Clothes"
@@ -150,7 +150,7 @@
     "discountedPrice": null,
     "imageUrl1": "../../public/images/23.png",
     "imageUrl2": "../../public/images/24.png",
-    "ratings": 4.8,
+    "ratings": 4,
     "category": "Men",
     "color": "Blue",
     "type": "Clothes"
@@ -176,7 +176,7 @@
     "discountedPrice": null,
     "imageUrl1": "../../public/images/27.png",
     "imageUrl2": "../../public/images/28.png",
-    "ratings": 4.7,
+    "ratings": 3.7,
     "category": "Men",
     "color": "Blue",
     "type": "Clothes"
@@ -189,7 +189,7 @@
     "discountedPrice": null,
     "imageUrl1": "../../public/images/29.png",
     "imageUrl2": "../../public/images/30.png",
-    "ratings": 4.9,
+    "ratings": 5,
     "category": "Men",
     "color": "Red",
     "type": "Shoes"

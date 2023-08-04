@@ -2,8 +2,25 @@ import { useState, useRef } from 'react';
 import { Box, Image, Heading, Text, VStack, Flex, IconButton, useToast } from '@chakra-ui/react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import StarRating from '../StarsRating/StarsRating';
 
-const ProductCard = ({ product }) => {
+interface ProductCardProps {
+  product: {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    discountedPrice: number | null;
+    imageUrl1: string;
+    imageUrl2: string;
+    ratings: number; // Include the ratings field in the product type
+    category: string;
+    color: string;
+    type: string;
+  };
+}
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+
   const [isHovered, setIsHovered] = useState(false);
   const [isHeartFilled, setIsHeartFilled] = useState(false);
   const [currentImage, setCurrentImage] = useState('imageUrl1');
@@ -100,6 +117,7 @@ const ProductCard = ({ product }) => {
         </Heading>
         <VStack align="start" spacing={2} visibility={isHovered ? 'hidden' : 'visible'}>
           <Text>{product.description}</Text>
+          <StarRating rating={product.ratings} />
           <Text>Price: ${product.price}</Text>
         </VStack>
       </Box>
