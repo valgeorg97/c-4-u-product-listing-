@@ -46,7 +46,7 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategory, selectedSub
   
 
 
-  const sortProducts = (productsToSort) => {
+  const sortProducts = (productsToSort: Product[]) => {
     let sortedResult = [...productsToSort]; 
 
     if (sortBy === 'az') {
@@ -63,22 +63,17 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategory, selectedSub
   };
   let filteredProducts = filterProducts()
 
-  const handleFilterChange = (filteredResult) => {
-    console.log('Filter Change:', filteredResult);
-    setFilteredProducts(filteredResult);
-  };
-
-  const handleSortChange = (value) => {
+  const handleSortChange = (value: string) => {
     console.log('Sort Change:', value);
     setSortBy(value);
   };
-
-  const handleColorFilterChange = (selectedColor) => {
+  
+  const handleColorFilterChange = (selectedColor: string) => {
     console.log('Color Filter Change:', selectedColor); 
     setColorFilter(selectedColor); 
   };
   
-  const handlePriceFilterChange = (newPriceFilter) => {
+  const handlePriceFilterChange = (newPriceFilter: [number, number]) => {
     console.log('Price Filter Change:', newPriceFilter); 
     setPriceFilter(newPriceFilter);
   };
@@ -87,22 +82,19 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategory, selectedSub
     setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 3);
   };
   return (
-    <Box>
-      <Flex mb={4} direction="column">
-        <Center>
-          <Filter
-            onFilterChange={handleFilterChange}
-            products={filteredProducts}
-            colorFilter={colorFilter}
-            priceFilter={priceFilter}
-            onColorFilterChange={handleColorFilterChange}
-            onPriceFilterChange={handlePriceFilterChange}
-          />
-          <Sort onSortChange={handleSortChange} />
-        </Center>
+    <Box p={4}>
+      <Flex mb={4} direction={{ base: 'column', md: 'row' }} justifyContent="space-between">
+        <Filter
+          products={filteredProducts}
+          colorFilter={colorFilter}
+          priceFilter={priceFilter}
+          onColorFilterChange={handleColorFilterChange}
+          onPriceFilterChange={handlePriceFilterChange}
+        />
+        <Sort onSortChange={handleSortChange} />
       </Flex>
       <Box mb={4}>
-        <Text fontWeight="bold">
+        <Text fontWeight="bold" fontSize="xl" textAlign="center">
           {selectedCategory} {selectedSubCategory}
         </Text>
       </Box>
@@ -115,7 +107,7 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategory, selectedSub
           <Text mb={2} fontWeight="bold">
             Showing {Math.min(visibleProducts, filteredProducts.length)} out of {filteredProducts.length} items
           </Text>
-          <Grid templateColumns="repeat(3, 1fr)" gap={6} mt={4}>
+          <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' }} gap={6} mt={4}>
             {sortProducts(filteredProducts)
               .slice(0, visibleProducts)
               .map((product) => (

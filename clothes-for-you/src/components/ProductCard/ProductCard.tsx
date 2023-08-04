@@ -13,7 +13,7 @@ interface ProductCardProps {
     discountedPrice: number | null;
     imageUrl1: string;
     imageUrl2: string;
-    ratings: number; // Include the ratings field in the product type
+    ratings: number; 
     category: string;
     color: string;
     type: string;
@@ -23,7 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const [isHovered, setIsHovered] = useState(false);
   const [isHeartFilled, setIsHeartFilled] = useState(false);
-  const [currentImage, setCurrentImage] = useState('imageUrl1');
+  const [currentImage, setCurrentImage] = useState<'imageUrl1' | 'imageUrl2'>('imageUrl1');
   const imageRef = useRef(null);
 
   const toast = useToast(); 
@@ -41,7 +41,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     showToast('Product successfully added to cart!', 'success'); 
   };
 
-  const showToast = (message: string, status: string) => {
+  const showToast = (message: string, status: "success" | "warning" | "info" | "error" | "loading" | undefined) => {
     toast({
       title: message,
       status: status,
@@ -118,7 +118,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <VStack align="start" spacing={2} visibility={isHovered ? 'hidden' : 'visible'}>
           <Text>{product.description}</Text>
           <StarRating rating={product.ratings} />
-          <Text>Price: ${product.price}</Text>
+          {product.type === 'Shoes' && product.discountedPrice ? (
+            <Flex align="center">
+              <Text as="s" color="gray.400" mr={2}>
+                ${product.price.toFixed(2)}
+              </Text>
+              <Text color="orange.500" fontWeight="bold">
+                ${product.discountedPrice.toFixed(2)}
+              </Text>
+            </Flex>
+          ) : (
+            <Text>Price: ${product.price.toFixed(2)}</Text>
+          )}
         </VStack>
       </Box>
     </Box>

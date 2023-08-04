@@ -4,6 +4,7 @@ import Navigation from '../src/layout/Navigation/Navigation';
 import ProductList from './components/ProductsList/ProductsList';
 import  { useState } from 'react';
 import Footer from './components/Footer/Footer';
+import DiscountAlert from './components/DiscountAlert/DiscountAlert';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         setSelectedCategory={setSelectedCategory}
         setSelectedSubCategory={setSelectedSubCategory}
       />
+      <DiscountAlert/>
       <ProductList 
       selectedCategory={selectedCategory}
       selectedSubCategory={selectedSubCategory}

@@ -186,7 +186,7 @@
     "name": "Men's Running Shoes",
     "description": "High-performance running shoes for men.",
     "price": 89.99,
-    "discountedPrice": null,
+    "discountedPrice": 79.99,
     "imageUrl1": "../../public/images/29.png",
     "imageUrl2": "../../public/images/30.png",
     "ratings": 5,

@@ -38,7 +38,13 @@ export default function WithSubnavigation({
   const { isOpen, onToggle } = useDisclosure()
 
   return (
-    <Box >
+    <Box
+      position="sticky"
+      top="0"
+      bg={useColorModeValue('white', 'gray.800')}
+      color={useColorModeValue('gray.600', 'white')}
+      zIndex="sticky"
+    >
       <Flex
         bg={useColorModeValue('white', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
@@ -95,7 +101,7 @@ const DesktopNav = ({ setSelectedCategory, setSelectedSubCategory }: { setSelect
   const linkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
-  const handleCategoryHover = (categoryLabel) => {
+  const handleCategoryHover = (categoryLabel: string) => {
     setSelectedCategory(categoryLabel);
   };
 
@@ -138,7 +144,7 @@ const DesktopNav = ({ setSelectedCategory, setSelectedSubCategory }: { setSelect
                 <Stack>
                   {navItem.children.map((child) => (
                     <DesktopSubNav
-                      label={''}
+                    
                       key={child.subLabel}
                       {...child}
                       setSelectedSubCategory={setSelectedSubCategory} 
@@ -155,8 +161,12 @@ const DesktopNav = ({ setSelectedCategory, setSelectedSubCategory }: { setSelect
   );
 };
 
+interface DesktopSubNavProps extends SubNavItem {
+  setSelectedSubCategory: (subLabel: string) => void;
+  navItem: NavItem;
+}
 
-const DesktopSubNav = ({ description, subLabel, setSelectedSubCategory, navItem }: SubNavItem & { setSelectedSubCategory: (subLabel: string) => void }) => {
+const DesktopSubNav = ({ description, subLabel, setSelectedSubCategory, navItem }: DesktopSubNavProps) => {
   return (
     <Box
       as={Link}

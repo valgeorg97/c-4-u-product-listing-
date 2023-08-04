@@ -2,19 +2,16 @@ import React from 'react';
 import { Box, Menu, Select, Text, VStack, HStack } from '@chakra-ui/react';
 
 interface FilterProps {
-  onFilterChange: (filteredResult: any[]) => void;
+
   products: any[]; 
   colorFilter: string;
   priceFilter: number[];
   onColorFilterChange: (selectedColor: string) => void;
-  onPriceFilterChange: (newPriceFilter: number[]) => void;
+  onPriceFilterChange: (newPriceFilter: [number, number]) => void;
+
 }
 
 const Filter: React.FC<FilterProps> = ({
-  onFilterChange,
-  products,
-  colorFilter,
-  priceFilter,
   onColorFilterChange,
   onPriceFilterChange,
 }) => {
