@@ -24,6 +24,7 @@ import {
 import { FaShoppingCart } from 'react-icons/fa';
 import {AiOutlineHeart} from 'react-icons/ai'
 import Logo from '../../assets/images/logo.png'
+import { Link } from 'react-router-dom';
 
 
 
@@ -94,16 +95,20 @@ const DesktopNav = ({ setSelectedCategory, setSelectedSubCategory }: { setSelect
   const linkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
+  const handleCategoryHover = (categoryLabel) => {
+    setSelectedCategory(categoryLabel);
+  };
+
   return (
     <Stack direction={'row'} spacing={4} align="center">
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          <Popover trigger={'click'} placement={'bottom-start'}>
+          <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
               <Box
-                as="a"
+                as={Link}
                 p={2}
-                href={navItem.href ?? '#'}
+                to={`/${navItem.label.toLowerCase()}`}
                 fontSize={'sm'}
                 fontWeight={500}
                 color={linkColor}
@@ -111,6 +116,7 @@ const DesktopNav = ({ setSelectedCategory, setSelectedSubCategory }: { setSelect
                   textDecoration: 'none',
                   color: linkHoverColor,
                 }}
+                onMouseEnter={() => handleCategoryHover(navItem.label)}
                 onClick={() => {
                   setSelectedCategory(navItem.label);
                   setSelectedSubCategory(''); 
@@ -136,6 +142,7 @@ const DesktopNav = ({ setSelectedCategory, setSelectedSubCategory }: { setSelect
                       key={child.subLabel}
                       {...child}
                       setSelectedSubCategory={setSelectedSubCategory} 
+                      navItem={navItem}
                     />
                   ))}
                 </Stack>
@@ -148,11 +155,12 @@ const DesktopNav = ({ setSelectedCategory, setSelectedSubCategory }: { setSelect
   );
 };
 
-const DesktopSubNav = ({ description, href, subLabel, setSelectedSubCategory }: SubNavItem & { setSelectedSubCategory: (subLabel: string) => void }) => {
+
+const DesktopSubNav = ({ description, subLabel, setSelectedSubCategory, navItem }: SubNavItem & { setSelectedSubCategory: (subLabel: string) => void }) => {
   return (
     <Box
-      as="a"
-      href={href}
+      as={Link}
+      to={`/${navItem.label.toLowerCase()}/${subLabel.toLowerCase()}`}
       role={'group'}
       display={'block'}
       p={2}
