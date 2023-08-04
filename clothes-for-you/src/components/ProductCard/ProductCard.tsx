@@ -1,24 +1,11 @@
 import { useState, useRef } from 'react';
-import { Box, Image, Heading, Text, VStack, Flex, IconButton, useToast } from '@chakra-ui/react';
+import { Box, Image, Heading, Text, VStack, Flex, IconButton, useToast, useBreakpointValue } from '@chakra-ui/react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import StarRating from '../StarsRating/StarsRating';
+import { ProductCardProps } from '../../types/types';
 
-interface ProductCardProps {
-  product: {
-    id: string;
-    name: string;
-    description: string;
-    price: number;
-    discountedPrice: number | null;
-    imageUrl1: string;
-    imageUrl2: string;
-    ratings: number; 
-    category: string;
-    color: string;
-    type: string;
-  };
-}
+
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const [isHovered, setIsHovered] = useState(false);
@@ -55,6 +42,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const toggleImage = () => {
     setCurrentImage(currentImage === 'imageUrl1' ? 'imageUrl2' : 'imageUrl1');
   };
+  const heartPosition = useBreakpointValue({ base: 'center', md: 'top-right' });
 
   return (
     <Box position="relative" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
@@ -75,7 +63,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <Box
         position="absolute"
         top={0}
-        right={24}
+        right={heartPosition === 'top-right' ? 24 : 'auto'}
+        left={heartPosition === 'center' ? '92%' : 'auto'}
+        transform={heartPosition === 'center' ? 'translateX(-50%)' : 'none'}
         zIndex={1}
         transition="visibility 0s, opacity 0.2s linear"
       >

@@ -64,17 +64,14 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategory, selectedSub
   let filteredProducts = filterProducts()
 
   const handleSortChange = (value: string) => {
-    console.log('Sort Change:', value);
     setSortBy(value);
   };
   
   const handleColorFilterChange = (selectedColor: string) => {
-    console.log('Color Filter Change:', selectedColor); 
     setColorFilter(selectedColor); 
   };
   
   const handlePriceFilterChange = (newPriceFilter: [number, number]) => {
-    console.log('Price Filter Change:', newPriceFilter); 
     setPriceFilter(newPriceFilter);
   };
 

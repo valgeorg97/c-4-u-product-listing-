@@ -1,27 +1,29 @@
-# React + TypeScript + Vite
+Clothes 4 You (C4Y) - Fashion E-commerce App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Clothes 4 You (C4Y) is an online fashion e-commerce application built with TypeScript, React, JavaScript, and Chakra UI. It allows users to browse and shop for clothes and fashion items in various categories like Men and Women, with subcategories including Shoes and Clothes. Users can filter products by price and color, sort items, add them to favorites and cart, and receive alerts for successful actions. The app also features an image toggling functionality when clicking on the product images and a "Load More" button to fetch additional products.
 
-Currently, two official plugins are available:
+Getting Started
+To run the application, follow these steps:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone the GitLab repository: Product listing page
 
-## Expanding the ESLint configuration
+2. Install dependencies using npm:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+npm install
 
-- Configure the top-level `parserOptions` property like this:
+3. Start the development server:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+npm run dev
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+The application should now be running at http://localhost:3000.
+
+
+Features:
+- Browse products in different categories: Men and Women
+- Choose subcategories: Shoes, Clothes, or Both
+- Filter products by price and color
+- Sort items based on various criteria
+- Add products to favorites and cart
+- Receive alerts for successful actions
+- Toggle product images by clicking on them
+- Load more products to view additional items

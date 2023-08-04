@@ -25,6 +25,8 @@ import { FaShoppingCart } from 'react-icons/fa';
 import {AiOutlineHeart} from 'react-icons/ai'
 import Logo from '../../assets/images/logo.png'
 import { Link } from 'react-router-dom';
+import { NavItem } from '../../types/types';
+import { DesktopSubNavProps } from '../../types/types';
 
 
 
@@ -161,10 +163,7 @@ const DesktopNav = ({ setSelectedCategory, setSelectedSubCategory }: { setSelect
   );
 };
 
-interface DesktopSubNavProps extends SubNavItem {
-  setSelectedSubCategory: (subLabel: string) => void;
-  navItem: NavItem;
-}
+
 
 const DesktopSubNav = ({ description, subLabel, setSelectedSubCategory, navItem }: DesktopSubNavProps) => {
   return (
@@ -272,19 +271,6 @@ const MobileNavItem = ({ label, children, href, setSelectedCategory, setSelected
   )
 }
 
-
-interface NavItem {
-  label: string;
-  description?: string;
-  href?: string;
-  children?: Array<SubNavItem>;
-}
-
-interface SubNavItem {
-  subLabel: string;
-  description?: string;
-  href?: string;
-}
 
 const NAV_ITEMS: Array<NavItem> = [
   {

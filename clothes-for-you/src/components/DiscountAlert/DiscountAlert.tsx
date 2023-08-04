@@ -1,7 +1,8 @@
 
-import { Box} from '@chakra-ui/react';
+import React from 'react';
+import { Box } from '@chakra-ui/react';
 
-const DiscountAlert = () => {
+const DiscountAlert: React.FC = () => {
   return (
     <Box
       bg="orange"
@@ -19,3 +20,4 @@ const DiscountAlert = () => {
 };
 
 export default DiscountAlert;
+

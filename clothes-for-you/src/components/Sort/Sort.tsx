@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { Box, Select, Text } from '@chakra-ui/react';
+import { SortProps } from '../../types/types';
 
-const Sort = ({ onSortChange }) => {
-  const handleSortChange = (event) => {
+
+const Sort: React.FC<SortProps> = ({ onSortChange }) => {
+  const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     onSortChange(value);
   };
