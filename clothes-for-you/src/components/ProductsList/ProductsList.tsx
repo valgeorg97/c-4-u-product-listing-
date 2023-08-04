@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getProducts } from '../../services/productsService';
 import { Product } from '../../types/types';
-import { Grid, Box, Text, Flex, Center } from '@chakra-ui/react';
+import { Grid, Box, Text, Flex, Center, Button } from '@chakra-ui/react';
 import { ProductListProps } from '../../types/types';
 import ProductCard from '../ProductCard/ProductCard';
 import Filter from '../Filter/Filter';
@@ -12,6 +12,7 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategory, selectedSub
   const [sortBy, setSortBy] = useState('default');
   const [colorFilter, setColorFilter] = useState('');
   const [priceFilter, setPriceFilter] = useState([0, 150]);
+  const [visibleProducts, setVisibleProducts] = useState(6);
 
 
   const filterProducts = () => {
@@ -81,6 +82,10 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategory, selectedSub
     console.log('Price Filter Change:', newPriceFilter); 
     setPriceFilter(newPriceFilter);
   };
+
+  const handleLoadMore = () => {
+    setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 3);
+  };
   return (
     <Box>
       <Flex mb={4} direction="column">
@@ -90,8 +95,8 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategory, selectedSub
             products={filteredProducts}
             colorFilter={colorFilter}
             priceFilter={priceFilter}
-            onColorFilterChange={handleColorFilterChange} 
-            onPriceFilterChange={handlePriceFilterChange} 
+            onColorFilterChange={handleColorFilterChange}
+            onPriceFilterChange={handlePriceFilterChange}
           />
           <Sort onSortChange={handleSortChange} />
         </Center>
@@ -101,20 +106,29 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategory, selectedSub
           {selectedCategory} {selectedSubCategory}
         </Text>
       </Box>
-      {filteredProducts.length === 0 ? 
-        <Text mb={2} fontWeight="bold">No items matching the criteria</Text>
-        :
+      {filteredProducts.length === 0 ? (
+        <Text mb={2} fontWeight="bold">
+          No items matching the criteria
+        </Text>
+      ) : (
         <>
           <Text mb={2} fontWeight="bold">
-            Showing {filteredProducts.length} out of {products.length} items
+            Showing {Math.min(visibleProducts, filteredProducts.length)} out of {filteredProducts.length} items
           </Text>
           <Grid templateColumns="repeat(3, 1fr)" gap={6} mt={4}>
-            {sortProducts(filteredProducts).map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+            {sortProducts(filteredProducts)
+              .slice(0, visibleProducts)
+              .map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
           </Grid>
+          {visibleProducts < filteredProducts.length && (
+            <Center mt={4}>
+              <Button onClick={handleLoadMore}>Load More</Button>
+            </Center>
+          )}
         </>
-      }
+      )}
     </Box>
   );
 };
