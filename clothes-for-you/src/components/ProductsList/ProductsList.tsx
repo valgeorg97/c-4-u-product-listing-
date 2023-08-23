@@ -82,9 +82,6 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategory, selectedSub
     <Box p={4}>
       <Flex mb={4} direction={{ base: 'column', md: 'row' }} justifyContent="space-between">
         <Filter
-          products={filteredProducts}
-          colorFilter={colorFilter}
-          priceFilter={priceFilter}
           onColorFilterChange={handleColorFilterChange}
           onPriceFilterChange={handlePriceFilterChange}
         />

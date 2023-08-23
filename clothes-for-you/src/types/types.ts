@@ -62,10 +62,6 @@ export interface Product {
   }
 
   export interface FilterProps {
-
-    products: any[]; 
-    colorFilter: string;
-    priceFilter: number[];
     onColorFilterChange: (selectedColor: string) => void;
     onPriceFilterChange: (newPriceFilter: [number, number]) => void;
   

@@ -5,7 +5,7 @@ import { StarRatingProps } from '../../types/types';
 
 
 const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
-  const validRating = Math.min(Math.max(rating, 0), 5); // Ensure rating is within the range of 0 to 5
+  const validRating = Math.min(Math.max(rating, 0), 5); 
   const fullStars = Math.floor(validRating);
   const hasHalfStar = validRating % 1 !== 0;
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
